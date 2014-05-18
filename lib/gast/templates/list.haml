@@ -1,0 +1,7 @@
+%h1
+  Items
+%ul{ class: "list-group" }
+  - @lists.each do |list|
+    %li{ class: "list-group-item" }
+      %a{ href: url("/posts/view/#{list}") }
+        = list

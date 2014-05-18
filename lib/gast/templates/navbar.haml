@@ -1,0 +1,11 @@
+%nav
+  .navbar.navbar-default{ role: "navigation" }
+    .container-fluid
+    .navbar-header
+      %a{ class: "navbar-brand", href: "#{url('/')}" }
+        Gast
+    %div{ class: "collapse navbar-collapse" }
+      %ul{ class: "nav navbar-nav" }
+        %li
+          %a{ href: "#{url('/posts/list')}" }
+            list

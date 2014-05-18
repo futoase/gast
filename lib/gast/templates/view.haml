@@ -1,0 +1,7 @@
+%h1
+  = @content_hash
+%form{ role: "form", action: "/posts/edit/#{params[:id].to_s}", method: "GET" }
+  %button{ type: "submit", class: "btn btn-primary" }
+    Update
+%p{ style: "margin-top: 20px;" }
+  = @item

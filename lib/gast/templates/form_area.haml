@@ -1,0 +1,8 @@
+.form-group
+  %select
+    %option
+      python
+  %textarea{ class: "form-control", style: "margin-top: 10px; height: 30em;", name: "content" }
+    = @item 
+%button{ type: "submit", class: "btn btn-primary" }
+  Submit

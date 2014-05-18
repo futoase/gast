@@ -1,0 +1,7 @@
+- if new_post
+  %form{ role: "form", action: "/posts/new", method: "POST" }
+    = haml :form_area
+- else
+  %form{ role: "form", action: "/posts/update/#{id}", method: "POST" }
+    %input{ type: "hidden", name: "_method", value: "put" }
+      = haml :form_area
