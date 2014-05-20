@@ -1,0 +1,10 @@
+language: ruby
+before_install:
+  - travis_retry gem install bundler
+before_script:
+  - git config --global user.name "travis.ci"
+  - git config --global user.email "travis-test@example.com"
+rvm:
+  - 2.1
+bundler_args: --path vendor/bundle
+script: bundle ex rspec
