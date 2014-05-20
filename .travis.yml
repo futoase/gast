@@ -1,0 +1,7 @@
+language: ruby
+before_install:
+  - travis_retry gem install bundler
+rvm:
+  - 2.1
+bundler_args: --path vendor/bundle
+script: bundle ex rspec
