@@ -25,7 +25,7 @@ module Gast
         config.environment = sprockets
         config.prefix      = assets_prefix
         config.digest      = digest_assets
-        #config.public_path = public_folder
+        config.public_path = '/public'
 
         config.debug       = true 
       end
