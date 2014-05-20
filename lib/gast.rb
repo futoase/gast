@@ -1,5 +1,14 @@
-require "gast/version"
-require "gast/app"
+require 'digest/sha2'
+require 'sinatra/base'
+require 'sinatra/reloader'
+require 'sprockets'
+require 'sprockets-helpers'
+require 'gast/memo'
+require 'gast/app'
+require 'gast/repository'
+require 'haml'
+require 'sass'
+require 'git'
 
 module Gast
   PATH = '/tmp/gast'

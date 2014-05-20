@@ -1,4 +1,4 @@
-require 'digest/sha2'
+require 'gast'
 
 module Gast
   class Repository
