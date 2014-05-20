@@ -1,7 +1,4 @@
-require 'git'
-require 'date'
-require 'digest/sha2'
-require 'gast/repository'
+require 'gast'
 
 module Gast
 
