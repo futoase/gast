@@ -4,6 +4,8 @@ require 'sprockets'
 require 'sprockets-helpers'
 require 'gast/memo'
 require 'gast'
+require 'haml'
+require 'sass'
 
 module Gast
   class App < Sinatra::Base
@@ -23,7 +25,7 @@ module Gast
         config.environment = sprockets
         config.prefix      = assets_prefix
         config.digest      = digest_assets
-        #config.public_path = public_folder
+        config.public_path = '/public'
 
         config.debug       = true 
       end
@@ -39,6 +41,14 @@ module Gast
       unless /[a-zA-Z0-9]{30}/ =~ id.to_s
         halt haml(:error, locals: { message: "error is format of id" })
       end
+    end
+
+    not_found do
+      haml :not_found
+    end
+    
+    error do
+      haml :error
     end
 
     get '/' do
