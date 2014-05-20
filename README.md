@@ -1,6 +1,8 @@
 # Gast
 
-TODO: Write a gem description
+[![Build Status](https://travis-ci.org/futoase/gast.svg?branch=feature/support-travis)](https://travis-ci.org/futoase/gast)
+
+memo application of using git.
 
 ## Installation
 
@@ -18,7 +20,10 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+> gast
+> open http://localhost:4567/
+```
 
 ## Contributing
 
