@@ -41,6 +41,14 @@ module Gast
       end
     end
 
+    not_found do
+      haml :not_found
+    end
+    
+    error do
+      haml :error
+    end
+
     get '/' do
       haml :index, locals: { new_post: true }
     end

@@ -81,4 +81,12 @@ describe Gast::App do
     expect(File.read(repository + '/content')).to eq welcome_to_underground
   end
 
+  it "should be get not found" do
+    get "/posts/hoge"
+
+    expect(last_response).not_to be_ok
+    expect(last_response.status).to be 404
+    expect(last_response.body).to match(/Not Found/)
+  end
+
 end
