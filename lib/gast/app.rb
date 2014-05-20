@@ -4,6 +4,8 @@ require 'sprockets'
 require 'sprockets-helpers'
 require 'gast/memo'
 require 'gast'
+require 'haml'
+require 'sass'
 
 module Gast
   class App < Sinatra::Base
