@@ -15,6 +15,8 @@ describe Gast::App do
   let(:hello_world) { "Hello World" }
   let(:welcome_to_underground) { "Welcome to underground" }
   let(:inline_html) { "<script>alert('Hello world!');</script>" }
+  let(:sample_of_code_ruby) { get_fixture('sample_of_code.rb') }
+
   let(:view_path) { /.+\/posts\/view\/[a-z0-9]+/ }
 
   it "should be get index" do
@@ -103,6 +105,15 @@ describe Gast::App do
     expect(last_response).to be_ok
     expect(last_response.body).to include(CGI.escapeHTML(inline_html))
 
+  end
+
+  it "should be post language type the code highlight" do
+    post '/posts/new', { content: sample_of_code_ruby, language: "ruby" }
+    repository = File.expand_path(Dir.glob(repo_dir + '/**').first)
+
+    get "/posts/view/#{repository.split('/').last}"
+
+    expect(last_response).to be_ok
   end
 
 end

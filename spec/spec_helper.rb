@@ -38,3 +38,7 @@ RSpec.configure do |config|
 
   config.order = 'random'
 end
+
+def get_fixture(name)
+  File.read(File.expand_path('./fixtures/' + name, __dir__))
+end
