@@ -1,6 +1,6 @@
 .form-group
-  %select
-    %option
+  %select{ name: "language" }
+    %option{ value: "python" }
       python
   %textarea{ class: "form-control", style: "margin-top: 10px; height: 30em;", name: "content" }
     = @item 
