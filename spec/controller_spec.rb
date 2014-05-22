@@ -14,6 +14,7 @@ describe Gast::App do
 
   let(:hello_world) { "Hello World" }
   let(:welcome_to_underground) { "Welcome to underground" }
+  let(:inline_html) { "<script>alert('Hello world!');</script>" }
   let(:view_path) { /.+\/posts\/view\/[a-z0-9]+/ }
 
   it "should be get index" do
@@ -87,6 +88,21 @@ describe Gast::App do
     expect(last_response).not_to be_ok
     expect(last_response.status).to be 404
     expect(last_response.body).to match(/Not Found/)
+  end
+
+  it "should be get content is escaped by HTML" do
+
+    post '/posts/new', { content: inline_html }
+
+    repository = File.expand_path(Dir.glob(repo_dir + '/**').first)
+
+    expect(File.read(repository + '/content')).to eq inline_html
+
+    get "/posts/view/#{repository.split('/').last}"
+
+    expect(last_response).to be_ok
+    expect(last_response.body).to include(CGI.escapeHTML(inline_html))
+
   end
 
 end

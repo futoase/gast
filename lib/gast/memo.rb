@@ -6,7 +6,7 @@ module Gast
 
     def self.save(content)
       @repo = Gast::Repository.new
-      @repo.content = content.to_s
+      @repo.content = CGI.unescapeHTML(content.to_s)
       @repo.publish
       @repo.commit!
       @repo.dir_name
@@ -14,7 +14,7 @@ module Gast
 
     def self.update(id, content)
       @repo = Gast::Repository.new(id)
-      @repo.content = content.to_s
+      @repo.content = CGI.unescapeHTML(content.to_s)
       @repo.publish
       @repo.commit!
       @repo.dir_name
@@ -31,7 +31,9 @@ module Gast
     end
 
     def self.item(id)
-      File.read(File.expand_path(Gast::PATH + "/#{id}/content"))
+      CGI.escapeHTML(
+        File.read(File.expand_path(Gast::PATH + "/#{id}/content"))
+      )
     end
 
     def initialize; end
