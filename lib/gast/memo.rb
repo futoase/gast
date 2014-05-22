@@ -13,6 +13,7 @@ module Gast
     end
 
     def self.update(id, content)
+      return id if content.to_s.chomp == item(id).chomp
       @repo = Gast::Repository.new(id)
       @repo.content = content.to_s
       @repo.publish
