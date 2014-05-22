@@ -2,6 +2,8 @@
   %select{ name: "language" }
     %option{ value: "python" }
       python
+    %option{ value: "ruby"}
+      ruby
   %textarea{ class: "form-control", style: "margin-top: 10px; height: 30em;", name: "content" }
     = @item 
 %button{ type: "submit", class: "btn btn-primary" }
