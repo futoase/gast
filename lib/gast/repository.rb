@@ -55,14 +55,14 @@ module Gast
       end
     end
 
-    def save_content(content)
+    def save_content
       path = File.expand_path(@path + "/content")
-      open(path, 'w', 0644) { |io| io.write(content) }
+      open(path, 'w', 0644) { |io| io.write(@content) }
     end
 
-    def save_language(language)
+    def save_language
       path = File.expand_path(@path + '/language')
-      open(path, 'w', 0644) { |io| io.write(language) }
+      open(path, 'w', 0644) { |io| io.write(@language) }
     end
 
   end
