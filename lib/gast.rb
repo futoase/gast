@@ -9,6 +9,7 @@ require 'gast/repository'
 require 'haml'
 require 'sass'
 require 'git'
+require 'cgi'
 
 module Gast
   PATH = '/tmp/gast'
