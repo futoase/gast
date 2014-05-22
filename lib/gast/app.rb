@@ -68,7 +68,8 @@ module Gast
     put '/posts/update/:id' do
       @result = Gast::Memo.update(
         id=params[:id].to_s, 
-        content=params[:content].to_s
+        content=params[:content].to_s,
+        language=params[:language].to_s
       )
       redirect to("/posts/view/#{params[:id]}")
     end
