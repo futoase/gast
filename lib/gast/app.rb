@@ -74,8 +74,10 @@ module Gast
     end
 
     post '/posts/new' do
-      new_id = Gast::Memo.save(params[:content].to_s)
-      redirect to("/posts/view/#{new_id}")
+      results = Gast::Memo.save(
+        params[:content].to_s, params[:language].to_s
+      )
+      redirect to("/posts/view/#{results[:id]}")
     end
 
   end

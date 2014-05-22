@@ -10,7 +10,10 @@ module Gast
       @repo.language = CGI.unescapeHTML(language.to_s)
       @repo.publish
       @repo.commit!
-      @repo.dir_name
+      { 
+        id: @repo.dir_name,
+        language: language
+      }
     end
 
     def self.update(id, content, language="no-highlight")
@@ -20,7 +23,10 @@ module Gast
       @repo.language = CGI.unescapeHTML(language.to_s)
       @repo.publish
       @repo.commit!
-      @repo.dir_name
+      { 
+        id: @repo.dir_name,
+        language: language
+      }
     end
 
     def self.number
