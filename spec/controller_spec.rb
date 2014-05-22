@@ -111,6 +111,9 @@ describe Gast::App do
     post '/posts/new', { content: sample_of_code_ruby, language: "ruby" }
     repository = File.expand_path(Dir.glob(repo_dir + '/**').first)
 
+    expect(File.read(repository + '/content')).to eq sample_of_code_ruby
+    expect(File.read(repository + '/language')).to eq "ruby"
+
     get "/posts/view/#{repository.split('/').last}"
 
     expect(last_response).to be_ok
