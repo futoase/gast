@@ -28,8 +28,11 @@ module Gast
     end
 
     def publish
-      @save_path = File.expand_path(@path + '/content')
-      open(@save_path, 'w', 0644) { |io| io.write(@content) }
+      @content_path = File.expand_path(@path + '/content')
+      open(@content_path, 'w', 0644) { |io| io.write(@content) }
+
+      @language_path = File.expand_path(@path + '/language')
+      open(@language_path, 'w', 0644) { |io| io.write(@language) }
     end
 
     def remove!
