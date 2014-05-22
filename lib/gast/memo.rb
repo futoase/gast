@@ -7,6 +7,7 @@ module Gast
     def self.save(content, language="no-highlight")
       @repo = Gast::Repository.new
       @repo.content = CGI.unescapeHTML(content.to_s)
+      @repo.language = CGI.unescapeHTML(language.to_s)
       @repo.publish
       @repo.commit!
       @repo.dir_name
@@ -16,6 +17,7 @@ module Gast
       return id if content.to_s.chomp == item(id).chomp
       @repo = Gast::Repository.new(id)
       @repo.content = CGI.unescapeHTML(content.to_s)
+      @repo.language = CGI.unescapeHTML(language.to_s)
       @repo.publish
       @repo.commit!
       @repo.dir_name

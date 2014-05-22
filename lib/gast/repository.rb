@@ -23,6 +23,10 @@ module Gast
       @content = content
     end
 
+    def language=(language)
+      @language = language.to_s
+    end
+
     def publish
       @save_path = File.expand_path(@path + '/content')
       open(@save_path, 'w', 0644) { |io| io.write(@content) }
