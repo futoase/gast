@@ -18,6 +18,7 @@ $:.unshift File.realpath(File.dirname(__FILE__) + '/../lib')
 require 'rspec'
 require 'rack/test'
 require 'webmock/rspec'
+require 'capybara/rspec'
 
 require 'sinatra'
 require 'timecop'
@@ -28,6 +29,8 @@ disable :raise_errors
 require 'gast/app'
 require 'gast/memo'
 require 'gast/repository'
+
+Capybara.app = Gast::App.new
 
 include Rack::Test::Methods
 
@@ -41,4 +44,8 @@ end
 
 def get_fixture(name)
   File.read(File.expand_path('./fixtures/' + name, __dir__))
+end
+
+def get_languages
+  YAML.load_file(File.expand_path('../config/languages.yml', __dir__))
 end

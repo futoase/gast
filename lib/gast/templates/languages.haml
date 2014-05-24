@@ -1,0 +1,4 @@
+%select{ name: "language" }
+  - @languages.map do |language|
+    %option{ value: "#{language}" }
+      = language

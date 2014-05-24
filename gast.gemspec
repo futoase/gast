@@ -33,6 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "webmock"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "rack-test"
+  spec.add_development_dependency "capybara"
   spec.add_development_dependency "pry"
   spec.add_development_dependency "pry-remote"
 end

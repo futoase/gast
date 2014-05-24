@@ -30,6 +30,12 @@ module Gast
       include Sprockets::Helpers
     end
 
+    before do
+      @languages = YAML.load_file(
+        File.expand_path('../../config/languages.yml', __dir__)
+      )
+    end
+
     before %r{/posts/\w+/(\w+)} do |id|
       unless /[a-zA-Z0-9]{30}/ =~ id.to_s
         halt haml(:error, locals: { message: "error is format of id" })
