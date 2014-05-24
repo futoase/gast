@@ -3,9 +3,7 @@
 
 guard :spork, :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAILS_ENV' => 'test' } do
   watch('lib/gast.rb')
-  watch('lib/gast/app.rb')
-  watch('lib/gast/memo.rb.rb')
-  watch('lib/gast/version.rb')
+  watch(%r{^lib/gast/(.+)\.rb$})
   watch('Gemfile.lock')
   watch('spec/spec_helper.rb') { :rspec }
   watch('test/test_helper.rb') { :test_unit }
