@@ -23,9 +23,13 @@ module Gast
       @content = content
     end
 
+    def language=(language)
+      @language = language.to_s
+    end
+
     def publish
-      @save_path = File.expand_path(@path + '/content')
-      open(@save_path, 'w', 0644) { |io| io.write(@content) }
+      save_content
+      save_language
     end
 
     def remove!
@@ -49,6 +53,16 @@ module Gast
         FileUtils.mkdir_p(@path)
         FileUtils.chmod(0755, @path)
       end
+    end
+
+    def save_content
+      path = File.expand_path(@path + "/content")
+      open(path, 'w', 0644) { |io| io.write(@content) }
+    end
+
+    def save_language
+      path = File.expand_path(@path + '/language')
+      open(path, 'w', 0644) { |io| io.write(@language) }
     end
 
   end

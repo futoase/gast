@@ -11,9 +11,11 @@ describe Gast::Repository do
   let(:repo_dir) { "/tmp/gast" }
 
   let(:user_content) { "Hello World" }
+  let(:selected_language) { "ruby" }
 
   before(:each) {
     repo.content = user_content
+    repo.language = selected_language
     repo.publish
     repo.commit!
   }
@@ -28,6 +30,10 @@ describe Gast::Repository do
 
   it "should be content is a Hello world" do
     expect(File.read(repo.path + '/content')).to eq user_content
+  end
+
+  it "should be language is a ruby" do
+    expect(File.read(repo.path + '/language')).to eq selected_language
   end
 
   it "should be save of commit message is correct" do

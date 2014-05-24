@@ -55,6 +55,7 @@ module Gast
 
     get '/posts/view/:id' do
       @item = Gast::Memo.item(params[:id].to_s)
+      @language = Gast::Memo.language(params[:id].to_s)
       @content_hash = params[:id].to_s
       haml :view
     end
@@ -68,14 +69,17 @@ module Gast
     put '/posts/update/:id' do
       @result = Gast::Memo.update(
         id=params[:id].to_s, 
-        content=params[:content].to_s
+        content=params[:content].to_s,
+        language=params[:language].to_s
       )
       redirect to("/posts/view/#{params[:id]}")
     end
 
     post '/posts/new' do
-      new_id = Gast::Memo.save(params[:content].to_s)
-      redirect to("/posts/view/#{new_id}")
+      results = Gast::Memo.save(
+        params[:content].to_s, params[:language].to_s
+      )
+      redirect to("/posts/view/#{results[:id]}")
     end
 
   end
