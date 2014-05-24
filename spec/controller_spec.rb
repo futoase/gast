@@ -119,4 +119,17 @@ describe Gast::App do
     expect(last_response).to be_ok
   end
 
+  it "should be succeeded change of language type" do
+    post '/posts/new', { content: sample_of_code_ruby, language: "ruby" }
+    repository = File.expand_path(Dir.glob(repo_dir + '/**').first)
+
+    expect(File.read(repository + '/content')).to eq sample_of_code_ruby
+    expect(File.read(repository + '/language')).to eq "ruby"
+
+    put "/posts/update/#{repository.split('/').last}", { content: sample_of_code_ruby, language: "python" }
+
+    expect(File.read(repository + '/content')).to eq sample_of_code_ruby
+    expect(File.read(repository + '/language')).to eq "python"
+  end
+
 end
