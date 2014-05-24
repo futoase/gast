@@ -45,6 +45,12 @@ module Gast
       )
     end
 
+    def self.language(id)
+      CGI.escapeHTML(
+        File.read(File.expand_path(Gast::PATH + "/#{id}/language"))
+      )
+    end
+
     def initialize; end
 
   end

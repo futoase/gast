@@ -4,7 +4,8 @@
       python
     %option{ value: "ruby"}
       ruby
-  %textarea{ class: "form-control", style: "margin-top: 10px; height: 30em;", name: "content" }
-    = @item 
+  = preserve do
+    %textarea{ class: "form-control", style: "margin-top: 10px; height: 30em;", name: "content", wrap: "hard" }
+      = @item 
 %button{ type: "submit", class: "btn btn-primary" }
   Submit

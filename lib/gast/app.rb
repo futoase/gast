@@ -55,6 +55,7 @@ module Gast
 
     get '/posts/view/:id' do
       @item = Gast::Memo.item(params[:id].to_s)
+      @language = Gast::Memo.language(params[:id].to_s)
       @content_hash = params[:id].to_s
       haml :view
     end
