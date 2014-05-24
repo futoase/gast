@@ -1,6 +1,7 @@
 # Gast
 
 [![Build Status](https://travis-ci.org/futoase/gast.svg?branch=feature/support-travis)](https://travis-ci.org/futoase/gast)
+[![Gem Version](https://badge.fury.io/rb/gast.svg)](http://badge.fury.io/rb/gast)
 
 memo application of using git.
 
