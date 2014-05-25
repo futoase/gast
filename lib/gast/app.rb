@@ -2,7 +2,6 @@ require 'gast'
 
 module Gast
   class App < Sinatra::Base
-
     enable :method_override
     set :sprockets, Sprockets::Environment.new(root)
     set :assets_prefix, '/assets'
@@ -20,7 +19,7 @@ module Gast
         config.digest      = digest_assets
         config.public_path = '/public'
 
-        config.debug       = true 
+        config.debug       = true
       end
 
       register Sinatra::Reloader
@@ -38,14 +37,14 @@ module Gast
 
     before %r{/posts/\w+/(\w+)} do |id|
       unless /[a-zA-Z0-9]{30}/ =~ id.to_s
-        halt haml(:error, locals: { message: "error is format of id" })
+        halt haml(:error, locals: { message: 'error is format of id' })
       end
     end
 
     not_found do
       haml :not_found
     end
-    
+
     error do
       haml :error
     end
@@ -59,34 +58,34 @@ module Gast
       haml :list
     end
 
-    get '/posts/view/:id' do
-      @item = Gast::Memo.item(params[:id].to_s)
-      @language = Gast::Memo.language(params[:id].to_s)
-      @content_hash = params[:id].to_s
+    get '/posts/view/:content_id' do
+      @item = Gast::Memo.item(params[:content_id].to_s)
+      @language = Gast::Memo.language(params[:content_id].to_s)
+      @content_hash = params[:content_id].to_s
       haml :view
     end
 
-    get '/posts/edit/:id' do
-      @item = Gast::Memo.item(params[:id].to_s)
-      @content_hash = params[:id].to_s
+    get '/posts/edit/:content_id' do
+      @item = Gast::Memo.item(params[:content_id].to_s)
+      @content_hash = params[:content_id].to_s
       haml :edit
     end
 
-    put '/posts/update/:id' do
+    put '/posts/update/:content_id' do
       @result = Gast::Memo.update(
-        id=params[:id].to_s, 
-        content=params[:content].to_s,
-        language=params[:language].to_s
+        params[:content_id].to_s,
+        params[:content].to_s,
+        params[:language].to_s
       )
-      redirect to("/posts/view/#{params[:id]}")
+      redirect to("/posts/view/#{params[:content_id]}")
     end
 
     post '/posts/new' do
       results = Gast::Memo.save(
-        params[:content].to_s, params[:language].to_s
+        params[:content].to_s,
+        params[:language].to_s
       )
-      redirect to("/posts/view/#{results[:id]}")
+      redirect to("/posts/view/#{results[:content_id]}")
     end
-
   end
 end

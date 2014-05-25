@@ -1,30 +1,28 @@
 require 'gast'
 
 module Gast
-
   class Memo
-
-    def self.save(content, language="no-highlight")
+    def self.save(content, language = 'no-highlight')
       @repo = Gast::Repository.new
       @repo.content = CGI.unescapeHTML(content.to_s)
       @repo.language = CGI.unescapeHTML(language.to_s)
       @repo.publish
       @repo.commit!
-      { 
-        id: @repo.dir_name,
+      {
+        content_id: @repo.dir_name,
         language: language
       }
     end
 
-    def self.update(id, content, language="no-highlight")
-      return id if content.to_s.chomp == item(id).chomp
-      @repo = Gast::Repository.new(id)
+    def self.update(content_id, content, language = 'no-highlight')
+      return content_id if content.to_s.chomp == item(content_id).chomp
+      @repo = Gast::Repository.new(content_id)
       @repo.content = CGI.unescapeHTML(content.to_s)
       @repo.language = CGI.unescapeHTML(language.to_s)
       @repo.publish
       @repo.commit!
-      { 
-        id: @repo.dir_name,
+      {
+        content_id: @repo.dir_name,
         language: language
       }
     end
@@ -52,6 +50,5 @@ module Gast
     end
 
     def initialize; end
-
   end
 end
