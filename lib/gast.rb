@@ -13,5 +13,5 @@ require 'cgi'
 require 'yaml'
 
 module Gast
-  PATH = '/tmp/gast'
+  PATH = File.expand_path('/tmp/gast')
 end

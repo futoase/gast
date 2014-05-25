@@ -11,4 +11,5 @@ group :development do
   gem 'guard-rspec'
   gem 'pry'
   gem 'pry-remote'
+  gem 'rubocop'
 end
