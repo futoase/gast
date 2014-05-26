@@ -2,20 +2,16 @@ require 'gast'
 
 module Gast
   class Repository
-    attr_reader :path, :dir_name
+    attr_reader :path
     attr_writer :content, :language
+    attr_accessor :dir_name
 
-    def initialize(dir_name = nil)
-      if dir_name.nil?
-        @dir_name = Digest::SHA512.new.update(rand.to_s).to_s[0..30]
-      else
-        @dir_name = dir_name.to_s
-      end
+    def initialize; end
 
-      @path = File.expand_path(File.join(Gast::PATH, @dir_name))
-
+    def create
+      @dir_name = new_name_of_repository if @dir_name.nil?
+      @path = path_of_repository
       create_dir
-
       @git = Git.init(@path)
     end
 
@@ -62,6 +58,14 @@ module Gast
         io.write(@language)
         io.flock(File::LOCK_UN)
       end
+    end
+
+    def new_name_of_repository
+      Digest::SHA512.new.update(rand.to_s).to_s[0..30]
+    end
+
+    def path_of_repository
+      File.expand_path(File.join(Gast::PATH, @dir_name))
     end
   end
 end
