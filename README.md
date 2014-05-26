@@ -5,7 +5,7 @@
 
 memo application of using git.
 
-![screen shot v0.0.4](https://cloud.githubusercontent.com/assets/72997/3080545/efdb38d0-e4b1-11e3-8572-724d184aae4d.png)
+![screen shot v0.0.4](https://cloud.githubusercontent.com/assets/72997/3080641/a04ba064-e4b3-11e3-9e8c-8adecc8873e4.png)
 
 ## Installation
 
