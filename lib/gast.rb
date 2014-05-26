@@ -13,5 +13,13 @@ require 'cgi'
 require 'yaml'
 
 module Gast
-  PATH = File.expand_path('/tmp/gast')
+  setting_of_path = YAML.load_file(
+    File.expand_path('../config/path.yml', __dir__)
+  )
+  
+  PATH = setting_of_path['save_dir']
+
+  LANGUAGES = YAML.load_file(
+    File.expand_path('../config/languages.yml', __dir__)
+  )
 end
