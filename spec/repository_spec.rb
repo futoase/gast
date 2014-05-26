@@ -25,11 +25,11 @@ describe Gast::Repository do
   end
 
   it 'should be content is a Hello world' do
-    expect(File.read(repo.path + '/content')).to eq user_content
+    expect(latest_content).to eq user_content
   end
 
   it 'should be language is a ruby' do
-    expect(File.read(repo.path + '/language')).to eq selected_language
+    expect(latest_language_of_content).to eq selected_language
   end
 
   it 'should be save of commit message is correct' do

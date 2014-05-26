@@ -57,30 +57,26 @@ describe Gast::App do
   it 'should be view of item' do
     post('/posts/new', content: hello_world)
 
-    repository = File.expand_path(Dir.glob(Gast::PATH + '/**').first)
-
-    get "/posts/view/#{repository.split('/').last}"
+    get "/posts/view/#{dir_name_of_latest_repository}"
 
     expect(last_response).to be_ok
-    expect(File.read(repository + '/content')).to eq hello_world
+    expect(latest_content).to eq hello_world
   end
 
   it 'should be can update of item' do
     post('/posts/new', content: hello_world)
 
-    repository = File.expand_path(Dir.glob(Gast::PATH + '/**').first)
-
-    get "/posts/view/#{repository.split('/').last}"
+    get "/posts/view/#{dir_name_of_latest_repository}"
 
     expect(last_response).to be_ok
 
-    put("/posts/update/#{repository.split('/').last}",
+    put("/posts/update/#{dir_name_of_latest_repository}",
         content: welcome_to_underground)
-    get "/posts/view/#{repository.split('/').last}"
+    get "/posts/view/#{dir_name_of_latest_repository}"
 
     expect(last_response).to be_ok
 
-    expect(File.read(repository + '/content')).to eq welcome_to_underground
+    expect(latest_content).to eq welcome_to_underground
   end
 
   it 'should be get not found' do
@@ -94,41 +90,36 @@ describe Gast::App do
   it 'should be get content is escaped by HTML' do
     post('/posts/new', content: inline_html)
 
-    repository = File.expand_path(Dir.glob(Gast::PATH + '/**').first)
+    expect(latest_content).to eq inline_html
 
-    expect(File.read(repository + '/content')).to eq inline_html
-
-    get "/posts/view/#{repository.split('/').last}"
+    get "/posts/view/#{dir_name_of_latest_repository}"
 
     expect(last_response).to be_ok
     expect(last_response.body).to include(CGI.escapeHTML(inline_html))
-
   end
 
   it 'should be post language type the code highlight' do
     post('/posts/new', content: sample_of_code_ruby, language: 'ruby')
-    repository = File.expand_path(Dir.glob(Gast::PATH + '/**').first)
 
-    expect(File.read(repository + '/content')).to eq sample_of_code_ruby
-    expect(File.read(repository + '/language')).to eq 'ruby'
+    expect(latest_content).to eq sample_of_code_ruby
+    expect(latest_language_of_content).to eq 'ruby'
 
-    get "/posts/view/#{repository.split('/').last}"
+    get "/posts/view/#{dir_name_of_latest_repository}"
 
     expect(last_response).to be_ok
   end
 
   it 'should be succeeded change of language type' do
     post('/posts/new', content: sample_of_code_ruby, language: 'ruby')
-    repository = File.expand_path(Dir.glob(Gast::PATH + '/**').first)
 
-    expect(File.read(repository + '/content')).to eq sample_of_code_ruby
-    expect(File.read(repository + '/language')).to eq 'ruby'
+    expect(latest_content).to eq sample_of_code_ruby
+    expect(latest_language_of_content).to eq 'ruby'
 
-    put("/posts/update/#{repository.split('/').last}",
+    put("/posts/update/#{dir_name_of_latest_repository}",
         content: sample_of_code_ruby, language: 'python')
 
-    expect(File.read(repository + '/content')).to eq sample_of_code_ruby
-    expect(File.read(repository + '/language')).to eq 'python'
+    expect(latest_content).to eq sample_of_code_ruby
+    expect(latest_language_of_content).to eq 'python'
   end
 
 end

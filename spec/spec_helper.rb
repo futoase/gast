@@ -49,3 +49,19 @@ end
 def get_languages
   YAML.load_file(File.expand_path('../config/languages.yml', __dir__))
 end
+
+def latest_repository
+  File.expand_path(Dir.glob(Gast::PATH + '/**').first)
+end
+
+def dir_name_of_latest_repository
+  latest_repository.split('/').last
+end
+
+def latest_content
+  File.read(latest_repository + '/content')
+end
+
+def latest_language_of_content
+  File.read(latest_repository + '/language')
+end
