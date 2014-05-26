@@ -48,12 +48,20 @@ module Gast
 
     def save_content
       path = File.expand_path(@path + '/content')
-      open(path, 'w', 0644) { |io| io.write(@content) }
+      open(path, 'w', 0644) do |io|
+        io.flock(File::LOCK_EX)
+        io.write(@content)
+        io.flock(File::LOCK_UN)
+      end
     end
 
     def save_language
       path = File.expand_path(@path + '/language')
-      open(path, 'w', 0644) { |io| io.write(@language) }
+      open(path, 'w', 0644) do |io|
+        io.flock(File::LOCK_EX)
+        io.write(@language)
+        io.flock(File::LOCK_UN)
+      end
     end
   end
 end
