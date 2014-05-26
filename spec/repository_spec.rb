@@ -12,6 +12,7 @@ describe Gast::Repository do
   before(:each) do
     repo.content = user_content
     repo.language = selected_language
+    repo.create
     repo.publish
     repo.commit!
   end

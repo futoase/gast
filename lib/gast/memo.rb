@@ -4,6 +4,7 @@ module Gast
   class Memo
     def self.save(content, language = 'no-highlight')
       @repo = Gast::Repository.new
+      @repo.create
       @repo.content = CGI.unescapeHTML(content.to_s)
       @repo.language = CGI.unescapeHTML(language.to_s)
       @repo.publish
@@ -16,7 +17,9 @@ module Gast
 
     def self.update(content_id, content, language = 'no-highlight')
       return content_id if content.to_s.chomp == item(content_id).chomp
-      @repo = Gast::Repository.new(content_id)
+      @repo = Gast::Repository.new
+      @repo.dir_name = content_id
+      @repo.create
       @repo.content = CGI.unescapeHTML(content.to_s)
       @repo.language = CGI.unescapeHTML(language.to_s)
       @repo.publish
