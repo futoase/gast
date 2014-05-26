@@ -30,9 +30,7 @@ module Gast
     end
 
     before do
-      @languages = YAML.load_file(
-        File.expand_path('../../config/languages.yml', __dir__)
-      )
+      @languages = Gast::LANGUAGES
     end
 
     before %r{/posts/\w+/(\w+)} do |id|
