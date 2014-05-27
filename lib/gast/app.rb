@@ -6,39 +6,26 @@ module Gast
       haml :index, locals: { new_post: true }
     end
 
-    get '/posts/list' do
-      @lists = Gast::Memo.lists
-      haml :list
-    end
+    namespace '/posts' do
+      get '/list' do
+        haml :list
+      end
 
-    get '/posts/view/:content_id' do
-      @item = Gast::Memo.item(params[:content_id].to_s)
-      @language = Gast::Memo.language(params[:content_id].to_s)
-      @content_hash = params[:content_id].to_s
-      haml :view
-    end
+      get '/view/:content_id' do
+        haml :view
+      end
 
-    get '/posts/edit/:content_id' do
-      @item = Gast::Memo.item(params[:content_id].to_s)
-      @content_hash = params[:content_id].to_s
-      haml :edit
-    end
+      get '/edit/:content_id' do
+        haml :edit
+      end
 
-    put '/posts/update/:content_id' do
-      @result = Gast::Memo.update(
-        params[:content_id].to_s,
-        params[:content].to_s,
-        params[:language].to_s
-      )
-      redirect to("/posts/view/#{params[:content_id]}")
-    end
+      put '/update/:content_id' do
+        redirect to("/posts/view/#{@content_id}")
+      end
 
-    post '/posts/new' do
-      results = Gast::Memo.save(
-        params[:content].to_s,
-        params[:language].to_s
-      )
-      redirect to("/posts/view/#{results[:content_id]}")
+      post '/new' do
+        redirect to("/posts/view/#{@content_id}")
+      end
     end
   end
 end
