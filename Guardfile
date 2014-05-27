@@ -13,7 +13,7 @@ end
 guard :rspec, cmd: 'bundle ex rspec' do
   watch(%r{^spec/.+_spec\.rb$})
   watch('spec/spec_helper.rb')  { "spec" }
-  watch(%r{spec/feature/.+.rb$})
+  watch(%r{spec/feature/.+_spec\.rb$})
 
   watch(%r{^lib/gast/app.rb$})                        { |m| "spec/controller_spec.rb" }
   watch(%r{^lib/gast/(.+)\.rb$})                      { |m| "spec/#{m[1]}_spec.rb" }
