@@ -10,7 +10,7 @@ describe Gast::Repository do
     repo.content = user_content
     repo.language = selected_language
     repo.create
-    repo.publish
+    repo.write
     repo.commit!
   end
 
