@@ -7,7 +7,7 @@ module Gast
       @repo.create
       @repo.content = CGI.unescapeHTML(content.to_s)
       @repo.language = CGI.unescapeHTML(language.to_s)
-      @repo.publish
+      @repo.write
       @repo.commit!
       {
         content_id: @repo.dir_name,
@@ -22,7 +22,7 @@ module Gast
       @repo.create
       @repo.content = CGI.unescapeHTML(content.to_s)
       @repo.language = CGI.unescapeHTML(language.to_s)
-      @repo.publish
+      @repo.write
       @repo.commit!
       {
         content_id: @repo.dir_name,
