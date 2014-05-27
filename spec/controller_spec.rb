@@ -1,21 +1,18 @@
 require 'spec_helper'
 
-def app
-  Gast::App
-end
-
 describe Gast::App do
 
-  after(:each) do
-    FileUtils.rm_r(Dir.glob(Gast::PATH + '/**'), secure: true)
+  def app
+    Gast::App
   end
 
   let(:hello_world) { 'Hello World' }
   let(:welcome_to_underground) { 'Welcome to underground' }
   let(:inline_html) { "<script>alert('Hello world!');</script>" }
   let(:sample_of_code_ruby) { get_fixture('sample_of_code.rb') }
-
   let(:view_path) { %r{.+/posts/view/[a-z0-9]+} }
+
+  after(:each) { cleanup_in_the_dir }
 
   it 'should be get index' do
     get '/'
@@ -121,5 +118,4 @@ describe Gast::App do
     expect(latest_content).to eq sample_of_code_ruby
     expect(latest_language_of_content).to eq 'python'
   end
-
 end

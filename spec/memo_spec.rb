@@ -3,9 +3,7 @@ require 'spec_helper'
 describe Gast::Memo do
   let(:welcome_to_underground) { 'Welcome to underground' }
 
-  after(:each) do
-    FileUtils.rm_r(Dir.glob(Gast::PATH + '/**'), secure: true)
-  end
+  after(:each) { cleanup_in_the_dir }
 
   it 'should be get list of directory' do
     10.times do |i|
@@ -13,5 +11,4 @@ describe Gast::Memo do
     end
     expect(Gast::Memo.number).to eq 10
   end
-
 end

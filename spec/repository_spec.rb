@@ -1,11 +1,8 @@
 require 'spec_helper'
 
 describe Gast::Repository do
-
   let(:repo) { Gast::Repository.new }
-
   let(:git) { Git.init(repo.path) }
-
   let(:user_content) { 'Hello World' }
   let(:selected_language) { 'ruby' }
 
@@ -17,9 +14,7 @@ describe Gast::Repository do
     repo.commit!
   end
 
-  after(:each) do
-    FileUtils.rm_r(Dir.glob(Gast::PATH + '/**'), secure: true)
-  end
+  after(:each) { cleanup_in_the_dir }
 
   it 'should be create of repository' do
     expect(FileTest.exists?(repo.path)).to be_true
@@ -38,5 +33,4 @@ describe Gast::Repository do
     expect(git.log.first.message).to eq "commit: #{DateTime.now}"
     Timecop.return
   end
-
 end

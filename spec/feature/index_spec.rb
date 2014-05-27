@@ -1,10 +1,27 @@
-describe "the index page", type: :feature do
-  it "get index in" do
+require 'spec_helper'
+
+describe 'the index page', type: :feature do
+  it 'get index in' do
     visit '/'
 
-    get_languages.each_with_index do |language, idx|
-      find(:xpath, "//select/option[#{idx+1}]").text eq language
+    Gast::LANGUAGES.each_with_index do |language, idx|
+      find("//select/option[#{idx+1}]").text eq language
     end
   end
-  :qa
+
+  it 'should be able to selected of multi language' do
+    visit '/'
+
+    find('//select').select('python')
+    find('//select').text eq 'python'
+    find('//select').select('ruby')
+    find('//select').text eq 'ruby'
+  end
+
+  it 'should be able to write text on the textarea' do
+    visit '/'
+
+    find('//textarea').set 'Hello world'
+    find('//textarea').text eq 'Hello world'
+  end
 end
