@@ -1,6 +1,8 @@
 require 'digest/sha2'
 require 'sinatra/base'
 require 'sinatra/reloader'
+require 'sinatra/contrib'
+require 'sinatra/namespace'
 require 'sprockets'
 require 'sprockets-helpers'
 require 'gast/memo'
