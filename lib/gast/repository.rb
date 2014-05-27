@@ -9,15 +9,15 @@ module Gast
     def initialize; end
 
     def create
-      @dir_name = new_name_of_repository if @dir_name.nil?
-      @path = path_of_repository
+      new_name_of_repository
+      path_of_repository
       create_dir
-      @git = Git.init(@path)
+      setup_repository
     end
 
-    def publish
-      save_content
-      save_language
+    def write
+      write_content
+      write_language
     end
 
     def remove!
@@ -25,13 +25,11 @@ module Gast
     end
 
     def save!
-      @git.add(all: true)
-      @git.commit_all("commit: #{DateTime.now}")
+      commit_all
     end
 
     def commit!
-      return save! if @git.ls_files.length == 0
-      return save! if @git.status.changed.length != 0
+      return save! unless changed_of_contents?
     end
 
     private
@@ -42,7 +40,7 @@ module Gast
       FileUtils.chmod(0755, @path)
     end
 
-    def save_content
+    def write_content
       path = File.expand_path(@path + '/content')
       open(path, 'w', 0644) do |io|
         io.flock(File::LOCK_EX)
@@ -51,7 +49,7 @@ module Gast
       end
     end
 
-    def save_language
+    def write_language
       path = File.expand_path(@path + '/language')
       open(path, 'w', 0644) do |io|
         io.flock(File::LOCK_EX)
@@ -61,11 +59,28 @@ module Gast
     end
 
     def new_name_of_repository
-      Digest::SHA512.new.update(rand.to_s).to_s[0..30]
+      if @dir_name.nil?
+        @dir_name = Digest::SHA512.new.update(rand.to_s).to_s[0..30]
+      end
     end
 
     def path_of_repository
-      File.expand_path(File.join(Gast::PATH, @dir_name))
+      @path = File.expand_path(File.join(Gast::PATH, @dir_name))
+    end
+
+    def setup_repository
+      @git = Git.init(@path)
+    end
+
+    def changed_of_contents?
+      return false if @git.ls_files.length == 0
+      return false if @git.status.changed.length != 0
+      return true
+    end
+
+    def commit_all
+      @git.add(all: true)
+      @git.commit_all("commit: #{DateTime.now}")
     end
   end
 end
