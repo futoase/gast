@@ -5,6 +5,7 @@ require 'sinatra/contrib'
 require 'sinatra/namespace'
 require 'sprockets'
 require 'sprockets-helpers'
+require 'gast/helper'
 require 'gast/memo'
 require 'gast/app'
 require 'gast/repository'
@@ -25,4 +26,6 @@ module Gast
   LANGUAGES = YAML.load_file(
     File.expand_path('../config/languages.yml', __dir__)
   )
+
+  DEFAULT_HIGHLIGHT = 'no-highlight'
 end

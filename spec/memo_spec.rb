@@ -7,7 +7,7 @@ describe Gast::Memo do
 
   it 'should be get list of directory' do
     10.times do |i|
-      Gast::Memo.save(welcome_to_underground)
+      Gast::Memo.create(welcome_to_underground)
     end
     expect(Gast::Memo.number).to eq 10
   end
