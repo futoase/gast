@@ -62,8 +62,8 @@ module Gast
           })
         end
 
-        result = Gast::Memo.save(@content, @language)
-        @content_id = result[:content_id]
+        result = Gast::Memo.create(@content, @language)
+        @content_id = result.content_id
       end
 
       before '/list' do
@@ -88,7 +88,9 @@ module Gast
       end
 
       before '/update/:content_id' do
-        Gast::Memo.update(@content_id, @content, @language)
+        if Gast::Memo.changed?(@content_id, @content)
+          Gast::Memo.update(@content_id, @content, @language)
+        end
       end
     end
   end

@@ -1,57 +1,90 @@
 require 'gast'
 
 module Gast
-  class Memo
-    def self.save(content, language = 'no-highlight')
-      @repo = Gast::Repository.new
-      @repo.create
-      @repo.content = CGI.unescapeHTML(content.to_s)
-      @repo.language = CGI.unescapeHTML(language.to_s)
-      @repo.write
-      @repo.commit!
-      {
-        content_id: @repo.dir_name,
-        language: language
-      }
+  module Memo
+    extend Helper
+
+    class Response
+      attr_reader :content_id, :language, :content
+
+      def initialize(content_id, language, content)
+        @content_id = content_id
+        @language = language
+        @content = content
+      end
     end
 
-    def self.update(content_id, content, language = 'no-highlight')
-      return content_id if content.to_s.chomp == item(content_id).chomp
-      @repo = Gast::Repository.new
-      @repo.dir_name = content_id
-      @repo.create
-      @repo.content = CGI.unescapeHTML(content.to_s)
-      @repo.language = CGI.unescapeHTML(language.to_s)
-      @repo.write
-      @repo.commit!
-      {
-        content_id: @repo.dir_name,
-        language: language
-      }
+    class Request
+      attr_reader :content_id, :language, :content
+
+      def initialize(content_id, language, content)
+        @content_id = content_id
+        @language = language
+        @content = content
+      end
     end
 
-    def self.number
+    def response(content_id, language, content)
+      Response.new(content_id, language, content)
+    end
+    module_function :response
+
+    def request(content_id, language, content)
+      Request.new(content_id, language, content)
+    end
+    module_function :request
+
+    def repository(content, language, content_id = nil)
+      repo = Repository.new
+      repo.dir_name = content_id
+      repo.create
+      repo.content = unescape_html { content }
+      repo.language = unescape_html { language }
+      repo.write
+      repo.commit!
+
+      repo.dir_name
+    end
+
+    def create(content, language = DEFAULT_HIGHLIGHT)
+      content_id = repository(content, language)
+      response(content_id, language, content)
+    end
+    module_function :create
+
+    def update(content_id, content, language = DEFAULT_HIGHLIGHT)
+      content_id = repository(content, language, content_id)
+      response(content_id, language, content)
+    end
+    module_function :update
+
+    def changed?(content_id, content)
+      content.to_s.chomp != item(content_id).chomp
+    end
+    module_function :changed?
+
+    def number
       lists.length
     end
+    module_function :number
 
-    def self.lists
+    def lists
       Dir.glob(File.expand_path(Gast::PATH + '/**')).map do |dir|
         dir.split('/').last
       end
     end
+    module_function :lists
 
-    def self.item(id)
-      CGI.escapeHTML(
-        File.read(File.expand_path(Gast::PATH + "/#{id}/content"))
-      )
+    def item(id)
+      escape_html { get_content(id) }
     end
+    module_function :item
 
-    def self.language(id)
-      CGI.escapeHTML(
-        File.read(File.expand_path(Gast::PATH + "/#{id}/language"))
-      )
+    def language(id)
+      escape_html { get_language(id) }
     end
+    module_function :language
 
-    def initialize; end
+    extend Memo
   end
 end

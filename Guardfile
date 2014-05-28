@@ -16,6 +16,7 @@ guard :rspec, cmd: 'bundle ex rspec' do
   watch(%r{spec/feature/.+_spec\.rb$})
 
   watch(%r{^lib/gast/app.rb$})                        { |m| "spec/controller_spec.rb" }
+  watch(%r{^lib/gast/helper.rb$})                     { "spec" }
   watch(%r{^lib/gast/(.+)\.rb$})                      { |m| "spec/#{m[1]}_spec.rb" }
 end
 

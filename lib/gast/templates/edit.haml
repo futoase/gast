@@ -1,5 +1,5 @@
 %h1
   = @content_id
-%form{ role: "form", action: "/posts/update/#{params[:id].to_s}", method: "POST" }
+%form{ role: "form", action: "/posts/update/#{@content_id}", method: "POST" }
   %input{ type: "hidden", name: "_method", value: "put" }
   = haml :form_area
