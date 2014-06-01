@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/futoase/gast.png?label=ready&title=Ready)](https://waffle.io/futoase/gast)
 # Gast
 
 [![Build Status](https://travis-ci.org/futoase/gast.svg?branch=feature/support-travis)](https://travis-ci.org/futoase/gast)
