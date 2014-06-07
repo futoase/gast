@@ -11,4 +11,11 @@ describe Gast::Memo do
     end
     expect(Gast::Memo.number).to eq 10
   end
+
+  it 'should be get mtime of file in the list' do
+    Gast::Memo.create(welcome_to_underground)
+
+    get '/posts/list'
+    expect(last_response).to be_ok
+  end
 end

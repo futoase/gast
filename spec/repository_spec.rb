@@ -17,7 +17,7 @@ describe Gast::Repository do
   after(:each) { cleanup_in_the_dir }
 
   it 'should be create of repository' do
-    expect(FileTest.exists?(repo.path)).to be_true
+    expect(FileTest.exists?(repo.path)).to be_truthy
   end
 
   it 'should be content is a Hello world' do

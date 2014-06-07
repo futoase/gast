@@ -2,10 +2,6 @@ require 'spec_helper'
 
 describe Gast::App do
 
-  def app
-    Gast::App
-  end
-
   let(:hello_world) { 'Hello World' }
   let(:welcome_to_underground) { 'Welcome to underground' }
   let(:inline_html) { "<script>alert('Hello world!');</script>" }

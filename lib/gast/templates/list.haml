@@ -1,7 +1,17 @@
 %h1
   Items
-%ul{ class: "list-group" }
-  - @lists.each do |list|
-    %li{ class: "list-group-item" }
-      %a{ href: url("/posts/view/#{list}") }
-        = list
+%table{ class: "table table-striped" }
+  %thead
+    %tr 
+      %th
+        Content ID
+      %th
+        Updated At
+  %tbody
+    - @lists.each do |list|
+      %tr
+        %td
+          %a{ href: url("/posts/view/#{list[:content_id]}") }
+            = list[:content_id]
+        %td
+          = list[:updated_at]

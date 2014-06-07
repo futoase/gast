@@ -70,7 +70,10 @@ module Gast
 
     def lists
       Dir.glob(File.expand_path(Gast::PATH + '/**')).map do |dir|
-        dir.split('/').last
+        {
+          content_id: dir.split('/').last,
+          updated_at: File.stat(dir + '/content').mtime
+        }
       end
     end
     module_function :lists
