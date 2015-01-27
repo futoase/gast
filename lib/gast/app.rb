@@ -15,6 +15,10 @@ module Gast
         haml :view
       end
 
+      get '/log/:content_id' do
+        haml :log
+      end
+
       get '/edit/:content_id' do
         haml :edit
       end

@@ -1,0 +1,18 @@
+%h1
+  Logs >
+  %a{ href: url("/posts/view/#{@content_id}") }
+    = @content_id
+%table{ class: "table table-striped" }
+  %thead
+    %tr
+      %th
+        SHA-1
+      %th
+        Created At
+  %tbody
+    - @log.each do |l|
+      %tr
+        %td
+          = l[:sha]
+        %td
+          = l[:time]

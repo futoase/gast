@@ -83,6 +83,12 @@ module Gast
     end
     module_function :item
 
+    def log(id)
+      repo = Repository.new
+      repo.dir_name = id
+      repo.log
+    end
+
     def language(id)
       escape_html { get_language(id) }
     end

@@ -20,6 +20,12 @@ module Gast
       write_language
     end
 
+    def log
+      path_of_repository
+      open_reposigory
+      commit_log
+    end
+
     def remove!
       FileUtils.remove_entry_secure(@path)
     end
@@ -70,6 +76,16 @@ module Gast
 
     def setup_repository
       @git = Git.init(@path)
+    end
+
+    def open_reposigory
+      @git = Git.open(@path)
+    end
+
+    def commit_log
+      @git.log.map do |g|
+        { sha: g.sha, time: g.date.to_s }
+      end
     end
 
     def changed_of_contents?
