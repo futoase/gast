@@ -56,6 +56,15 @@ describe Gast::App do
     expect(latest_content).to eq hello_world
   end
 
+  it 'should be log of item' do
+    post('/posts/new', content: hello_world)
+
+    get "/posts/log/#{dir_name_of_latest_repository}"
+
+    expect(last_response).to be_ok
+    expect(latest_content).to eq hello_world
+  end
+
   it 'should be can update of item' do
     post('/posts/new', content: hello_world)
 

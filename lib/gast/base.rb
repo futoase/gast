@@ -71,7 +71,7 @@ module Gast
       end
 
       before '/*/:content_id' do
-        if %w[view edit update].include? request.path_info.split('/')[2]
+        if %w[view log edit update].include? request.path_info.split('/')[2]
           @content_id = params[:content_id].to_s
           @content = params[:content].to_s
           @language = params[:language].to_s
@@ -81,6 +81,10 @@ module Gast
       before '/view/:content_id' do
         @item = Gast::Memo.item(@content_id)
         @language = Gast::Memo.language(@content_id)
+      end
+
+      before '/log/:content_id' do
+        @log = Gast::Memo.log(@content_id)
       end
 
       before '/edit/:content_id' do
