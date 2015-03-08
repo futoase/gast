@@ -24,4 +24,11 @@ describe 'the index page', type: :feature do
     find('//textarea').set 'Hello world'
     find('//textarea').text eq 'Hello world'
   end
+
+  it 'should be able to write text on the title input' do
+    visit '/'
+
+    find('//input').set 'My Title'
+    find('//input').text eq 'My Title'
+  end
 end

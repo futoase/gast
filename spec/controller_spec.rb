@@ -5,6 +5,7 @@ describe Gast::App do
   let(:hello_world) { 'Hello World' }
   let(:welcome_to_underground) { 'Welcome to underground' }
   let(:inline_html) { "<script>alert('Hello world!');</script>" }
+  let(:inline_html_title) {"<b>hoge</b>"}
   let(:sample_of_code_ruby) { get_fixture('sample_of_code.rb') }
   let(:view_path) { %r{.+/posts/view/[a-z0-9]+} }
 
@@ -98,6 +99,21 @@ describe Gast::App do
 
     expect(last_response).to be_ok
     expect(last_response.body).to include(CGI.escapeHTML(inline_html))
+  end
+
+  it 'should be title is escaped by HTML' do
+    post('/posts/new', content: inline_html, title:inline_html_title)
+
+    expect(latest_title).to eq inline_html_title
+
+    get "/posts/view/#{dir_name_of_latest_repository}"
+
+    expect(last_response).to be_ok
+    expect(last_response.body).to include(CGI.escapeHTML(inline_html_title))
+
+    get '/posts/list'
+    expect(last_response).to be_ok
+    expect(last_response.body).to include('&lt;b&gt;hoge&lt;/b&gt;')
   end
 
   it 'should be post language type the code highlight' do
