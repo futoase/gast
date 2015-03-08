@@ -3,7 +3,7 @@ require 'gast'
 module Gast
   class Repository
     attr_reader :path
-    attr_writer :content, :language
+    attr_writer :content, :language, :title
     attr_accessor :dir_name
 
     def initialize; end
@@ -18,6 +18,7 @@ module Gast
     def write
       write_content
       write_language
+      write_title
     end
 
     def log
@@ -60,6 +61,15 @@ module Gast
       open(path, 'w', 0644) do |io|
         io.flock(File::LOCK_EX)
         io.write(@language)
+        io.flock(File::LOCK_UN)
+      end
+    end
+
+    def write_title
+      path = File.expand_path(@path + '/title')
+      open(path, 'w', 0644) do |io|
+        io.flock(File::LOCK_EX)
+        io.write(@title)
         io.flock(File::LOCK_UN)
       end
     end

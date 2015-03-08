@@ -1,8 +1,12 @@
 %h1
   = @content_id
 %form{ role: "form", action: "/posts/edit/#{@content_id}", method: "GET" }
-  %button{ type: "submit", class: "btn btn-primary" }
-    Update
+  %div.col-xs-2
+    %button{ type: "submit", class: "btn btn-primary" }
+      Update
+  %div.col-xs-10
+    %h3{ style:"margin-top: 3px;" }
+      = (@title == "") ? "&nbsp" : @title
 
 %div{ style: "margin-top: 20px;" }
   = preserve do
