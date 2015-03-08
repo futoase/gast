@@ -49,13 +49,13 @@ module Gast
       repo.dir_name
     end
 
-    def create(content, language = DEFAULT_HIGHLIGHT, title)
+    def create(content, language = DEFAULT_HIGHLIGHT, title = nil)
       content_id = repository(content, language, nil, title)
       response(content_id, language, content, title)
     end
     module_function :create
 
-    def update(content_id, content, language = DEFAULT_HIGHLIGHT, title)
+    def update(content_id, content, language = DEFAULT_HIGHLIGHT, title = nil)
       content_id = repository(content, language, content_id, title)
       response(content_id, language, content, title)
     end
