@@ -71,6 +71,10 @@ def latest_language_of_content
   File.read(latest_repository + '/language')
 end
 
+def latest_title
+  File.read(latest_repository + '/title')
+end
+
 def cleanup_in_the_dir
   FileUtils.rm_r(Dir.glob(Gast::PATH + '/**'), secure: true)
 end

@@ -5,10 +5,12 @@ describe Gast::Repository do
   let(:git) { Git.init(repo.path) }
   let(:user_content) { 'Hello World' }
   let(:selected_language) { 'ruby' }
+  let(:title) { 'My awesome title' }
 
   before(:each) do
     repo.content = user_content
     repo.language = selected_language
+    repo.title = title
     repo.create
     repo.write
     repo.commit!
@@ -26,6 +28,10 @@ describe Gast::Repository do
 
   it 'should be language is a ruby' do
     expect(latest_language_of_content).to eq selected_language
+  end
+
+  it 'should be title is My awesome title' do
+    expect(latest_title).to eq title
   end
 
   it 'should be save of commit message is correct' do

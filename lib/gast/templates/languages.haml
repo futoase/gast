@@ -1,4 +1,4 @@
 %select{ name: "language" }
   - @languages.map do |language|
-    %option{ value: "#{language}" }
+    %option{ value: "#{language}", :selected => @language == language }
       = language

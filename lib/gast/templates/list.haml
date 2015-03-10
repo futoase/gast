@@ -2,9 +2,11 @@
   Items
 %table{ class: "table table-striped" }
   %thead
-    %tr 
+    %tr
       %th
         Content ID
+      %th
+        Title
       %th
         Updated At
   %tbody
@@ -13,5 +15,7 @@
         %td
           %a{ href: url("/posts/view/#{list[:content_id]}") }
             = list[:content_id]
+        %td
+          = CGI.escapeHTML(list[:title])
         %td
           = list[:updated_at]
