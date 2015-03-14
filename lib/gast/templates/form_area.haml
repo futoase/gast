@@ -1,8 +1,10 @@
 .form-group
   = haml :languages
   = haml :title
-  = preserve do
-    %textarea{ class: "form-control", style: "margin-top: 10px; height: 30em;", name: "content", wrap: "hard" }
-      = @item
+  %h2
+    content
+    = preserve do
+      %textarea{ class: "form-control", rows: "30", placeholder: "Input content...", style: "margin-top: 10px; height: 30em;", name: "content", wrap: "hard" }
+        = @item
 %button{ type: "submit", class: "btn btn-primary" }
   Submit

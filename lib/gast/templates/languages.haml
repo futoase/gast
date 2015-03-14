@@ -1,4 +1,6 @@
-%select{ name: "language" }
+%h2
+  language
+%select{ name: "language", class: "form-control" }
   - @languages.map do |language|
     %option{ value: "#{language}", :selected => @language == language }
       = language

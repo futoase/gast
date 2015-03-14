@@ -1,15 +1,20 @@
 %h1
+  Content :
   = @content_id
-%form{ role: "form", action: "/posts/edit/#{@content_id}", method: "GET" }
-  %div.col-xs-2
-    %button{ type: "submit", class: "btn btn-primary" }
-      Update
-  %div.col-xs-10
-    %h3{ style:"margin-top: 3px;" }
-      = (@title == "") ? "&nbsp" : @title
 
-%div{ style: "margin-top: 20px;" }
-  = preserve do
-    %pre{ style: "white-space: pre-wrap;" }
-      %code{ class: "#{@language}" }
-        = @item
+%form{ role: "form", action: "/posts/edit/#{@content_id}", method: "GET" }
+
+  %div.row
+    %div.col-md-2.col-xs-2
+      %button{ type: "submit", class: "btn btn-primary" }
+        Update
+    %div.col-md-2.col-xs-2
+      %h3{ style:"margin-top: 0.5em;" }
+        Title:
+        = (@title == "") ? "&nbsp" : @title
+
+  %div{ style: "margin-top: 20px;" }
+    = preserve do
+      %pre{ style: "white-space: pre-wrap;" }
+        %code{ class: "#{@language}" }
+          = @item
