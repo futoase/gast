@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gast (0.0.10)
+    gast (0.0.12)
       bundler (~> 1.6)
       git
       haml
