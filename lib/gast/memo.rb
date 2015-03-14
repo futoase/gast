@@ -42,7 +42,9 @@ module Gast
       repo.create
       repo.content = unescape_html { content }
       repo.language = unescape_html { language }
-      repo.title = unescape_html { title }
+      if title
+        repo.title = unescape_html { title }
+      end
       repo.write
       repo.commit!
 
