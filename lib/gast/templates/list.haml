@@ -16,6 +16,9 @@
           %a{ href: url("/posts/view/#{list[:content_id]}") }
             = list[:content_id]
         %td
-          = CGI.escapeHTML(list[:title])
+          - if list[:title]
+            = CGI.escapeHTML(list[:title])
+          - else
+            No Title
         %td
           = list[:updated_at]
